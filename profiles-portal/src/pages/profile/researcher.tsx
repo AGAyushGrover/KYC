@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
 import CommonDetails from '@/component/CommonDetails'
+import { useRouter } from 'next/navigation'
 
 export default function ResearcherProfile() {
+  const router = useRouter()
   const [commonForm, setCommonForm] = useState<any>({})
   const [researcherForm, setResearcherForm] = useState({
     institution: '',
@@ -38,7 +40,7 @@ export default function ResearcherProfile() {
     e.preventDefault()
     console.log('Common:', commonForm)
     console.log('Researcher:', researcherForm)
-    // TODO: Save or send to backend
+    router.push('/FinalForm')
   }
 
   return (
@@ -47,11 +49,12 @@ export default function ResearcherProfile() {
         Researcher Profile Details
       </h1>
 
-      <div className="flex justify-center">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-3xl"
-        >
+      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
+          <div className="flex justify-center">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
+            >
 
         <CommonDetails commonForm={commonForm} />
 
@@ -155,6 +158,7 @@ export default function ResearcherProfile() {
             Submit
           </button>
         </form>
+      </div>
       </div>
     </Layout>
   )

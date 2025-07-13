@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
 import CommonDetails from '../../component/CommonDetails'
+import { useRouter } from 'next/navigation'
 
 export default function GigWorkerProfile() {
+  const router = useRouter()
   const [commonForm, setCommonForm] = useState<any>({})
   const [gigForm, setGigForm] = useState({
     primarySkill: '',
@@ -40,7 +42,7 @@ export default function GigWorkerProfile() {
     e.preventDefault()
     console.log('Common:', commonForm)
     console.log('Gig Worker:', gigForm)
-    // Send to backend or save
+    router.push('/FinalForm')
   }
 
   return (
@@ -50,10 +52,11 @@ export default function GigWorkerProfile() {
       </h1>
 
       {/* ✅ Gig Worker-specific Form */}
+      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
       <div className="flex justify-center">
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-3xl"
+          className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
         >
             <CommonDetails commonForm={commonForm} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -190,6 +193,7 @@ export default function GigWorkerProfile() {
             Submit
           </button>
         </form>
+      </div>
       </div>
     </Layout>
   )

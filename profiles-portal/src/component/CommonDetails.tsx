@@ -1,20 +1,20 @@
-// components/CommonDetails.tsx
-
 export default function CommonDetails({ commonForm }: { commonForm: any }) {
   return (
     <div className="mb-6 flex flex-col md:flex-row md:justify-between md:items-start">
       <div className="md:w-2/3">
-        <h2 className="text-xl font-semibold text-blue-600 mb-4">
+        <h2 className="text-3xl font-semibold text-blue-600 mb-4">
           Common Details
         </h2>
-        <div className="space-y-1">
+        <div className="space-y-1 text-5lg">
           <p><strong>Full Name:</strong> {commonForm.fullName}</p>
+          <p><strong>Date of Birth:</strong> {commonForm.dob}</p>
           <p><strong>Age:</strong> {commonForm.age}</p>
           <p><strong>Email:</strong> {commonForm.email}</p>
           <p><strong>Phone:</strong> {commonForm.phone}</p>
           <p><strong>Educational Background:</strong> {commonForm.education}</p>
 
           <p className="mt-4 font-semibold text-blue-600">Permanent Address</p>
+          <p><strong>Residence:</strong> {commonForm.residence}</p>
           <p><strong>City:</strong> {commonForm.addressCity}</p>
           <p><strong>State:</strong> {commonForm.addressState}</p>
           <p><strong>Country:</strong> {commonForm.addressCountry}</p>
@@ -26,6 +26,10 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
 
           <p className="mt-4"><strong>About:</strong> {commonForm.about}</p>
           <p className="mt-4"><strong>Interests:</strong> {commonForm.interests}</p>
+
+          <p className="mt-4 font-semibold text-blue-600">ID Details</p>
+          <p><strong>ID Type:</strong> {commonForm.idType}</p>
+          <p><strong>ID Number:</strong> {commonForm.idNumber}</p>
         </div>
       </div>
 
