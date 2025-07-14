@@ -5,7 +5,7 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
         <h2 className="text-3xl font-semibold text-blue-600 mb-4">
           Common Details
         </h2>
-        <div className="space-y-1 text-5lg">
+        <div className="space-y-1 text-lg">
           <p><strong>Full Name:</strong> {commonForm.fullName}</p>
           <p><strong>Date of Birth:</strong> {commonForm.dob}</p>
           <p><strong>Age:</strong> {commonForm.age}</p>
@@ -20,6 +20,7 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
           <p><strong>Country:</strong> {commonForm.addressCountry}</p>
 
           <p className="mt-4 font-semibold text-blue-600">Current Address</p>
+          <p><strong>Residence:</strong> {commonForm.currentResidence}</p>
           <p><strong>City:</strong> {commonForm.currentCity}</p>
           <p><strong>State:</strong> {commonForm.currentState}</p>
           <p><strong>Country:</strong> {commonForm.currentCountry}</p>
@@ -28,8 +29,17 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
           <p className="mt-4"><strong>Interests:</strong> {commonForm.interests}</p>
 
           <p className="mt-4 font-semibold text-blue-600">ID Details</p>
-          <p><strong>ID Type:</strong> {commonForm.idType}</p>
-          <p><strong>ID Number:</strong> {commonForm.idNumber}</p>
+          {commonForm.selectedIds && commonForm.selectedIds.length > 0 ? (
+            <ul className="list-disc pl-5">
+              {commonForm.selectedIds.map((idType: string) => (
+                <li key={idType}>
+                  <strong>{idType.charAt(0).toUpperCase() + idType.slice(1)}:</strong> {commonForm.idDetails[idType]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No IDs selected.</p>
+          )}
         </div>
       </div>
 

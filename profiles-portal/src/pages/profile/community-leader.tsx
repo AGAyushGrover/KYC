@@ -48,10 +48,10 @@ const handleSubmit = (e: React.FormEvent) => {
 
   return (
     <Layout>
-      <h1 className="text-3xl font-bold text-blue-600 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-blue-600 mb-6 text-center ">
         Community Leader Profile Details
       </h1>
-      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
+      <div className="min-h-screen bg-center bg-gradient-to-b from-white to-blue-50" >
       {/* ✅ Community Leader-specific Form */}
       <div className="flex justify-center">
         <form

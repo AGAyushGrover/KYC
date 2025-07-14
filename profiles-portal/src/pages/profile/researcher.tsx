@@ -49,7 +49,7 @@ export default function ResearcherProfile() {
         Researcher Profile Details
       </h1>
 
-      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
+      <div className="min-h-screen bg-cover bg-center  bg-gradient-to-b from-white to-blue-50">
           <div className="flex justify-center">
             <form
               onSubmit={handleSubmit}

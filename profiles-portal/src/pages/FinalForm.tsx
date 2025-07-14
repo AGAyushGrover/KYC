@@ -21,16 +21,40 @@ export default function FinalForm() {
   }
 
   const handleEdit = () => {
-    if (profileForm?.categoryName === 'Student') {
-      router.push('/studentProfile')
-    } else if (profileForm?.categoryName === 'Lawyer') {
-      router.push('/lawyerProfile')
-    } else if (profileForm?.categoryName === 'Community Leader') {
-      router.push('/communityLeaderProfile')
-    } else {
-      router.push('/')
-    }
+  if (profileForm?.categoryName === 'Student') {
+    router.push('/profile/student')
+  } else if (profileForm?.categoryName === 'Researcher') {
+    router.push('/profile/researcher')
+  } else if (profileForm?.categoryName === 'Founder') {
+    router.push('/profile/founder')
+  } else if (profileForm?.categoryName === 'Technical Expert') {
+    router.push('/profile/technical-expert')
+  } else if (profileForm?.categoryName === 'Financial Professional') {
+    router.push('/profile/financial-professional')
+  } else if (profileForm?.categoryName === 'Domain Expert') {
+    router.push('/profile/domain-expert')
+  } else if (profileForm?.categoryName === 'Marketing and Sales') {
+    router.push('/profile/marketing-sales')
+  } else if (profileForm?.categoryName === 'Legal Professional') {
+    router.push('/profile/legal-professional')
+  } else if (profileForm?.categoryName === 'Influencer') {
+    router.push('/profile/influencer')
+  } else if (profileForm?.categoryName === 'Investor') {
+    router.push('/profile/investor')
+  } else if (profileForm?.categoryName === 'Mentor') {
+    router.push('/profile/mentor')
+  } else if (profileForm?.categoryName === 'Gig Worker') {
+    router.push('/profile/gig-worker')
+  } else if (profileForm?.categoryName === 'Community Leader') {
+    router.push('/profile/community-leader')
+  } else if (profileForm?.categoryName === 'Incubator') {
+    router.push('/profile/incubator')
+  } else if (profileForm?.categoryName === 'Government Authority') {
+    router.push('/profile/government-authority')
+  } else {
+    router.push('/')
   }
+}
 
   const formatKey = (key: string) => {
     const withSpaces = key.replace(/([A-Z])/g, ' $1').trim()
@@ -50,10 +74,9 @@ export default function FinalForm() {
   return (
     <Layout>
      <div
-    className="min-h-screen flex justify-center items-center bg-cover bg-center"
-    style={{ backgroundImage: "url('/bg.png')" }}
+    className="min-h-screen flex justify-center items-center bg-cover bg-center  bg-gradient-to-b from-white to-blue-50"
   >
-    <div className="bg-white/90 shadow-lg rounded-2xl p-8 w-full max-w-4xl backdrop-blur-md">
+    <div className="bg-gradient-to-b from-blue-2 to-blue-200 shadow-lg rounded-2xl p-8 w-full max-w-4xl backdrop-blur-md">
           <h1 className="text-3xl font-bold text-blue-700 mb-8 text-center">
             Review & Confirm Your Details
           </h1>

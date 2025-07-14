@@ -8,11 +8,11 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white font-serif flex flex-col">
-      <header className="bg-blue-600 text-white p-3 flex items-center">
+      <header className="bg-gradient-to-b from-blue-200 to-blue-800 text-white flex items-center">
         <Link href="/" legacyBehavior>
           <a className="flex items-center text-5xl font-bold">
             <img
-              src="/logo.png" // change to your logo file
+              src="/logo.png"
               alt="Logo"
               className="h-30 w-30 mr-2 object-contain"
             />

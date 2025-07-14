@@ -36,11 +36,11 @@ export default function CategorySelection() {
   return (
     <Layout>
       <div
-    className="min-h-screen bg-cover bg-center flex justify-center items-center px-4"
-    style={{ backgroundImage: "url('/bg5.png')" }}
+    className="min-h-screen bg-cover bg-center flex justify-center items-center px-4 "
+
   >
     {/* White content area */}
-    <div className="bg-white/90 shadow-lg rounded-2xl w-full max-w-6xl p-10">
+    <div className="bg-centre bg-gradient-to-b from-blue-100 to-blue-3 shadow-lg rounded-2xl w-full max-w-6xl p-10">
       <h1 className="text-3xl font-bold text-blue-600 mb-10 text-center">
         Choose Your Category
       </h1>
