@@ -6,6 +6,7 @@ export default function Home() {
   const [form, setForm] = useState({
     fullName: '',
     age: '',
+    dob: '',
     email: '',
     phone: '',
     profilePhoto: '',
@@ -19,6 +20,14 @@ export default function Home() {
     currentCountry: '',
     about: '',
     interests: '',
+    selectedIds: [], // Array to store selected ID types
+    idDetails: {
+      aadhar: '',
+      drivingLicense: '',
+      passport: '',
+      voterIdCard: '',
+      panCard: ''
+    }
   })
 
 const router = useRouter()
@@ -38,11 +47,37 @@ const router = useRouter()
     }
   }
 
+  // Handle ID selection
+  const handleIdSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value)
+    setForm({ ...form, selectedIds: selectedOptions })
+  }
+
+  // Handle ID details input
+  const handleIdDetailsChange = (idType: string, value: string) => {
+    setForm({
+      ...form,
+      idDetails: {
+        ...form.idDetails,
+        [idType]: value
+      }
+    })
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault()
-  localStorage.setItem('commonForm', JSON.stringify(form))
-  router.push('/category')
-}
+    e.preventDefault()
+    localStorage.setItem('commonForm', JSON.stringify(form))
+    router.push('/category')
+  }
+
+  // ID options configuration
+  const idOptions = [
+    { value: 'aadhar', label: 'Aadhar Card', placeholder: 'Enter 12-digit Aadhar number' },
+    { value: 'drivingLicense', label: 'Driving License', placeholder: 'Enter driving license number' },
+    { value: 'passport', label: 'Passport', placeholder: 'Enter passport number' },
+    { value: 'voterIdCard', label: 'Voter ID Card', placeholder: 'Enter voter ID number' },
+    { value: 'panCard', label: 'PAN Card', placeholder: 'Enter PAN number' }
+  ]
 
   return (
     <Layout>
@@ -81,6 +116,20 @@ const router = useRouter()
                 value={form.age}
                 onChange={handleChange}
                 placeholder="Enter age"
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Date of Birth */}
+            <div className="md:col-span-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Date of Birth
+              </label>
+              <input
+                name="dob"
+                type="date"
+                value={form.dob}
+                onChange={handleChange}
                 className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -140,6 +189,44 @@ const router = useRouter()
                 />
               )}
             </div>
+
+            {/* ID Selection */}
+            <div className="md:col-span-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Select ID Documents (Hold Ctrl/Cmd to select multiple)
+              </label>
+              <select
+                multiple
+                value={form.selectedIds}
+                onChange={handleIdSelection}
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 h-32"
+              >
+                {idOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Dynamic ID Input Boxes */}
+            {form.selectedIds.map((idType) => {
+              const idOption = idOptions.find(option => option.value === idType)
+              return (
+                <div key={idType} className="md:col-span-2">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    {idOption?.label} Number
+                  </label>
+                  <input
+                    type="text"
+                    value={form.idDetails[idType as keyof typeof form.idDetails]}
+                    onChange={(e) => handleIdDetailsChange(idType, e.target.value)}
+                    placeholder={idOption?.placeholder}
+                    className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              )
+            })}
 
             {/* Education */}
             <div className="md:col-span-2">
