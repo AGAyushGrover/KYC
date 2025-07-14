@@ -142,47 +142,9 @@ export default function Home() {
                   />
                 </div>
 
-                {/* 👉 Put the rest of your fields below exactly as before... */}
-                {/* The whole content box scrolls inside this div ONLY. */}
-
-                {/* Example: dynamic IDs */}
-                <div className="md:col-span-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Select ID Documents
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {idOptions.map((option) => (
-                      <label key={option.value} className="flex items-center space-x-3">
-                        <input
-                          type="checkbox"
-                          value={option.value}
-                          checked={form.selectedIds.includes(option.value)}
-                          onChange={() => handleIdSelection(option.value)}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        />
-                        <span className="text-gray-800">{option.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {form.selectedIds.map((idType) => {
-                  const idOption = idOptions.find(option => option.value === idType)
-                  return (
-                    <div key={idType} className="md:col-span-2">
-                      <label className="block text-gray-700 text-sm font-bold mb-2">
-                        {idOption?.label} Number
-                      </label>
-                      <input
-                        type="text"
-                        value={form.idDetails[idType as keyof typeof form.idDetails]}
-                        onChange={(e) => handleIdDetailsChange(idType, e.target.value)}
-                        placeholder={idOption?.placeholder}
-                        className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                  )
-                })}
+             
+                 
+               
 
 
                {/* Age */}
