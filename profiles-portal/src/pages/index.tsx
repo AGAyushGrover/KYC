@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 export default function Home() {
   const [form, setForm] = useState({
     fullName: '',
+    dob: '',
     age: '',
     dob: '',
     email: '',
@@ -15,6 +16,7 @@ export default function Home() {
     addressCity: '',
     addressState: '',
     addressCountry: '',
+    currentResidence: '',
     currentCity: '',
     currentState: '',
     currentCountry: '',
@@ -30,15 +32,32 @@ export default function Home() {
     }
   })
 
-const router = useRouter()
+  const router = useRouter()
+
+  const calculateAge = (dob: string) => {
+  if (!dob) return ''
+  const birthDate = new Date(dob)
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--
+  }
+  return age.toString()
+}
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target
 
-  // Handle photo file selection
+  if (name === 'dob') {
+    const calculatedAge = calculateAge(value)
+    setForm({ ...form, dob: value, age: calculatedAge })
+  } else {
+    setForm({ ...form, [name]: value })
+  }
+}
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0]
@@ -84,11 +103,16 @@ const router = useRouter()
       <h1 className="text-3xl font-bold text-blue-600 mb-6 text-center">
         Let us know about you!
       </h1>
+        <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "linear-gradient(#ffffff, #e0f7ff)" }}
+>
+
 
       <div className="flex justify-center">
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-3xl"
+          className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Full Name */}
@@ -105,6 +129,20 @@ const router = useRouter()
               />
             </div>
 
+            {/* Date of Birth */}
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Date of Birth
+              </label>
+              <input
+                name="dob"
+                type="date"
+                value={form.dob}
+                onChange={handleChange}
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
             {/* Age */}
             <div>
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -114,9 +152,9 @@ const router = useRouter()
                 name="age"
                 type="number"
                 value={form.age}
-                onChange={handleChange}
-                placeholder="Enter age"
-                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Age will be auto-calculated"
+                readOnly
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 bg-gray-100 focus:outline-none"
               />
             </div>
 
@@ -242,13 +280,13 @@ const router = useRouter()
               />
             </div>
 
-            {/* --- Permanent Address Section --- */}
+            {/* Permanent Address */}
             <div className="md:col-span-2">
               <h2 className="text-xl font-semibold text-blue-600 mb-2">
                 Permanent Address
               </h2>
             </div>
-            
+
             <div>
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Residence
@@ -263,10 +301,10 @@ const router = useRouter()
             </div>
 
             <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                City
-              </label>
-              <input
+               <label className="block text-gray-700 text-sm font-bold mb-2">
+                 City
+               </label>
+               <input
                 name="addressCity"
                 value={form.addressCity}
                 onChange={handleChange}
@@ -310,13 +348,26 @@ const router = useRouter()
 
             <div>
               <label className="block text-gray-700 text-sm font-bold mb-2">
+               Residence
+              </label>
+              <input
+                name="currentResidence"
+                value={form.currentResidence}
+                onChange={handleChange}
+                placeholder="Current Residence"
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
                 City
               </label>
               <input
                 name="currentCity"
                 value={form.currentCity}
                 onChange={handleChange}
-                placeholder="Current city"
+                placeholder="Current City"
                 className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -329,7 +380,7 @@ const router = useRouter()
                 name="currentState"
                 value={form.currentState}
                 onChange={handleChange}
-                placeholder="Current state"
+                placeholder="Current State"
                 className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -342,12 +393,60 @@ const router = useRouter()
                 name="currentCountry"
                 value={form.currentCountry}
                 onChange={handleChange}
-                placeholder="Current country"
+                placeholder="Current Country"
                 className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
+          
+          {/* Education */}
+            <div className="md:col-span-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Educational Background
+              </label>
+              <textarea
+                name="education"
+                value={form.education}
+                onChange={handleChange}
+                placeholder="Enter education"
+                className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows={3}
+              />
+            </div>
 
-            {/* About */}
+            {/* ID Type */}
+            <div>
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Select ID Type
+              </label>
+              <select
+                name="idType"
+                value={form.idType}
+                onChange={handleChange}
+                className="shadow border rounded w-full py-3 px-4 text-gray-1200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="">-- Select ID --</option>
+                <option value="Aadhar">Aadhar Card</option>
+                <option value="Passport">Passport</option>
+                <option value="Driving License">Driving License</option>
+              </select>
+            </div>
+
+            {/* ID Number - show only if ID Type is selected */}
+            {form.idType && (
+              <div>
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  {form.idType} Number
+                </label>
+                <input
+                  name="idNumber"
+                  value={form.idNumber}
+                  onChange={handleChange}
+                  placeholder={`Enter ${form.idType} Number`}
+                  className="shadow border rounded w-full py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            )}
+            {/* About & Interests */}
             <div className="md:col-span-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 About
@@ -362,7 +461,6 @@ const router = useRouter()
               />
             </div>
 
-            {/* Interests */}
             <div className="md:col-span-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Interests
@@ -385,6 +483,7 @@ const router = useRouter()
           </button>
         </form>
       </div>
+    </div>
     </Layout>
   )
 }

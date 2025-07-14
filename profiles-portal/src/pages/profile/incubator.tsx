@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
 import CommonDetails from '../../component/CommonDetails'
+import { useRouter } from 'next/navigation'
 
 export default function IncubatorProfile() {
+  const router = useRouter()
   const [commonForm, setCommonForm] = useState<any>({})
   const [incubatorForm, setIncubatorForm] = useState({
     incubatorName: '',
@@ -39,7 +41,7 @@ export default function IncubatorProfile() {
     e.preventDefault()
     console.log('Common:', commonForm)
     console.log('Incubator:', incubatorForm)
-    // Save or send to backend later
+    router.push('/FinalForm')
   }
 
   return (
@@ -48,10 +50,11 @@ export default function IncubatorProfile() {
         Incubator / Accelerator Profile Details
       </h1>
 
+      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
       <div className="flex justify-center">
         <form
           onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-3xl"
+          className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
         >
           {/* ✅ Common details */}
           <CommonDetails commonForm={commonForm} />
@@ -165,6 +168,7 @@ export default function IncubatorProfile() {
             Submit
           </button>
         </form>
+      </div>
       </div>
     </Layout>
   )

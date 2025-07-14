@@ -1,10 +1,10 @@
-// pages/profile/influencer.tsx
-
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
 import CommonDetails from '../../component/CommonDetails'
+import { useRouter } from 'next/navigation'
 
 export default function InfluencerProfile() {
+  const router = useRouter()
   const [commonForm, setCommonForm] = useState<any>({})
   const [influencerForm, setInfluencerForm] = useState({
     socialMediaHandles: '',
@@ -41,7 +41,7 @@ export default function InfluencerProfile() {
     e.preventDefault()
     console.log('Common:', commonForm)
     console.log('Influencer:', influencerForm)
-    // Save or send to backend
+    router.push('/FinalForm')
   }
 
   return (
@@ -50,30 +50,16 @@ export default function InfluencerProfile() {
         Influencer Profile Details
       </h1>
 
-      {/* ✅ Profile Photo Left - Common Details Right */}
-      <div className="flex justify-center">
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-6 w-full max-w-3xl flex flex-col md:flex-row md:justify-between md:items-start">
-          {commonForm.profilePhoto && (
-            <div className="md:w-1/3 mb-4 md:mb-0 md:mr-8 flex justify-center">
-              <img
-                src={commonForm.profilePhoto}
-                alt="Profile"
-                className="h-48 w-48 object-cover rounded-full shadow"
-              />
-            </div>
-          )}
-          <div className="flex-1">
+      <div className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg5.png')" }}>
+          <div className="flex justify-center">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
+            >
+                
+            {/* ✅ Common details */}
             <CommonDetails commonForm={commonForm} />
-          </div>
-        </div>
-      </div>
-
-      {/* ✅ Influencer-specific Form */}
-      <div className="flex justify-center">
-        <form
-          onSubmit={handleSubmit}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-3xl"
-        >
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Social Media Handles */}
             <div className="md:col-span-2">
@@ -193,6 +179,7 @@ export default function InfluencerProfile() {
             Submit
           </button>
         </form>
+      </div>
       </div>
     </Layout>
   )
