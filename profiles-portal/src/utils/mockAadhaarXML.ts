@@ -1,7 +1,7 @@
 export const mockAadhaarXML = `<?xml version="1.0" encoding="UTF-8"?>
 <aadhaar>
   <name>KANIKA VERMA</name>
-  <dob>2003-05-08</dob>
+  <dob>2004-10-05</dob>
   <gender>F</gender>
   <uid>123456789012</uid>
   <father_name>RAJESH VERMA</father_name>
