@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function MentorProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [mentorForm, setMentorForm] = useState({
     mentorshipAreas: '',
     yearsOfExperience: '',
@@ -14,13 +12,6 @@ export default function MentorProfile() {
     educationCertificate: '',
     testimonials: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

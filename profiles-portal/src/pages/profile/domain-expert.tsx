@@ -1,5 +1,5 @@
 // pages/profile/domain-expert.tsx
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Layout from '../../component/Layout'
 import { useRouter } from 'next/navigation'
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Layout from '../component/Layout'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 // import { AadhaarComparison, ComparisonResult } from '../types/aadhaarComparison'
 // import { AadhaarParser } from '../parsers/aadhaarParser'
 
@@ -40,7 +40,7 @@ export default function Home() {
   // const [isVerifying, setIsVerifying] = useState(false)
   // const [xmlProcessing, setXmlProcessing] = useState(false)
 
-  const router = useRouter()
+  // const router = useRouter()
 
   const calculateAge = (dob: string) => {
     if (!dob) return ''
@@ -89,15 +89,15 @@ export default function Home() {
     }
   }
 
-  const handleIdDetailsChange = (idType: string, value: string) => {
-    setForm({
-      ...form,
-      idDetails: {
-        ...form.idDetails,
-        [idType]: value
-      }
-    })
-  }
+  // const handleIdDetailsChange = (idType: string, value: string) => {
+  //   setForm({
+  //     ...form,
+  //     idDetails: {
+  //       ...form.idDetails,
+  //       [idType]: value
+  //     }
+  //   })
+  // }
 
   // Updated function to handle Aadhaar XML upload and automatic parsing
   // const handleAadhaarXmlUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
