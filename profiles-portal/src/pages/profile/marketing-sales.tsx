@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function MarketingProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [marketingForm, setMarketingForm] = useState({
     professionalBackground: '',
     currentCompany: '',
@@ -16,13 +14,6 @@ export default function MarketingProfile() {
     portfolio: '',
     governmentID: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,7 +31,6 @@ export default function MarketingProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Marketing:', marketingForm)
     router.push('/FinalForm')
   }
@@ -57,8 +47,6 @@ export default function MarketingProfile() {
               onSubmit={handleSubmit}
               className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
             >
-          {/* ✅ Common details */}
-          <CommonDetails commonForm={commonForm} />
 
           {/* ✅ Marketing-specific fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

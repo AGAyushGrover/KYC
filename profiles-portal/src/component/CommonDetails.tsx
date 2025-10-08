@@ -1,4 +1,30 @@
-export default function CommonDetails({ commonForm }: { commonForm: any }) {
+import Image from 'next/image';
+
+// 1. Define a type for the commonForm prop
+interface CommonFormDetails {
+  fullName: string;
+  dob: string;
+  age: number | string;
+  email: string;
+  phone: string;
+  education: string;
+  residence: string;
+  addressCity: string;
+  addressState: string;
+  addressCountry: string;
+  currentResidence: string;
+  currentCity: string;
+  currentState: string;
+  currentCountry: string;
+  about: string;
+  interests: string;
+  selectedIds: string[];
+  idDetails: { [key: string]: string }; // Or Record<string, string>
+  profilePhoto?: string; // Optional because it's checked before use
+}
+
+// Use the new type instead of 'any'
+export default function CommonDetails({ commonForm }: { commonForm: CommonFormDetails }) {
   return (
     <div className="mb-6 flex flex-col md:flex-row md:justify-between md:items-start">
       <div className="md:w-2/3">
@@ -6,6 +32,7 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
           Common Details
         </h2>
         <div className="space-y-1 text-lg">
+          {/* ... (rest of your component's JSX is fine) ... */}
           <p><strong>Full Name:</strong> {commonForm.fullName}</p>
           <p><strong>Date of Birth:</strong> {commonForm.dob}</p>
           <p><strong>Age:</strong> {commonForm.age}</p>
@@ -45,10 +72,13 @@ export default function CommonDetails({ commonForm }: { commonForm: any }) {
 
       {commonForm.profilePhoto && (
         <div className="md:w-1/3 mt-4 md:mt-0 md:ml-8 flex justify-center">
-          <img
+          {/* 2. Use the Next.js Image component */}
+          <Image
             src={commonForm.profilePhoto}
             alt="Profile"
-            className="h-48 w-48 object-cover rounded-full shadow"
+            width={192} // h-48 w-48 in Tailwind is 12rem = 192px
+            height={192}
+            className="object-cover rounded-full shadow"
           />
         </div>
       )}

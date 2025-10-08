@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import Layout from '../component/Layout'
 import { useRouter } from 'next/navigation'
-import { AadhaarComparison, ComparisonResult } from '../types/aadhaarComparison'
-import { AadhaarParser } from '../parsers/aadhaarParser'
+// import { AadhaarComparison, ComparisonResult } from '../types/aadhaarComparison'
+// import { AadhaarParser } from '../parsers/aadhaarParser'
 
 export default function Home() {
   const [form, setForm] = useState({
@@ -34,11 +34,11 @@ export default function Home() {
   })
 
   // New state for Aadhaar verification
-  const [aadhaarXml, setAadhaarXml] = useState<string>('')
-  const [parsedAadhaarData, setParsedAadhaarData] = useState<any>(null)
-  const [verificationResult, setVerificationResult] = useState<ComparisonResult | null>(null)
-  const [isVerifying, setIsVerifying] = useState(false)
-  const [xmlProcessing, setXmlProcessing] = useState(false)
+  // const [aadhaarXml, setAadhaarXml] = useState<string>('')
+  // const [parsedAadhaarData, setParsedAadhaarData] = useState<any>(null)
+  // const [verificationResult, setVerificationResult] = useState<ComparisonResult | null>(null)
+  // const [isVerifying, setIsVerifying] = useState(false)
+  // const [xmlProcessing, setXmlProcessing] = useState(false)
 
   const router = useRouter()
 
@@ -100,122 +100,122 @@ export default function Home() {
   }
 
   // Updated function to handle Aadhaar XML upload and automatic parsing
-  const handleAadhaarXmlUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0]
-      setXmlProcessing(true)
+  // const handleAadhaarXmlUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files[0]) {
+  //     const file = e.target.files[0]
+  //     setXmlProcessing(true)
       
-      try {
-        const reader = new FileReader()
-        reader.onload = async (event) => {
-          const xmlContent = event.target?.result as string
-          setAadhaarXml(xmlContent)
+  //     try {
+  //       const reader = new FileReader()
+  //       reader.onload = async (event) => {
+  //         const xmlContent = event.target?.result as string
+  //         setAadhaarXml(xmlContent)
           
-          // Automatically parse the XML and extract data
-          const parsedData = AadhaarParser.parseAadhaarXML(xmlContent)
+  //         // Automatically parse the XML and extract data
+  //         const parsedData = AadhaarParser.parseAadhaarXML(xmlContent)
           
-          if (parsedData) {
-            setParsedAadhaarData(parsedData)
+  //         if (parsedData) {
+  //           setParsedAadhaarData(parsedData)
             
-            // Auto-fill form fields with parsed data
-            setForm(prevForm => ({
-              ...prevForm,
-              fullName: parsedData.name || prevForm.fullName,
-              dob: parsedData.dob || prevForm.dob,
-              age: parsedData.dob ? calculateAge(parsedData.dob) : prevForm.age,
-              idDetails: {
-                ...prevForm.idDetails,
-                aadhar: parsedData.documentNumber || prevForm.idDetails.aadhar
-              },
-              // Auto-fill address if available
-              residence: parsedData.address || prevForm.residence,
-              addressCity: parsedData.city || prevForm.addressCity,
-              addressState: parsedData.state || prevForm.addressState,
-              addressCountry: parsedData.country || prevForm.addressCountry
-            }))
+  //           // Auto-fill form fields with parsed data
+  //           setForm(prevForm => ({
+  //             ...prevForm,
+  //             fullName: parsedData.name || prevForm.fullName,
+  //             dob: parsedData.dob || prevForm.dob,
+  //             age: parsedData.dob ? calculateAge(parsedData.dob) : prevForm.age,
+  //             idDetails: {
+  //               ...prevForm.idDetails,
+  //               aadhar: parsedData.documentNumber || prevForm.idDetails.aadhar
+  //             },
+  //             // Auto-fill address if available
+  //             residence: parsedData.address || prevForm.residence,
+  //             addressCity: parsedData.city || prevForm.addressCity,
+  //             addressState: parsedData.state || prevForm.addressState,
+  //             addressCountry: parsedData.country || prevForm.addressCountry
+  //           }))
             
-            // Automatically select Aadhaar if not already selected
-            if (!prevForm.selectedIds.includes('aadhar')) {
-              setForm(prevForm => ({
-                ...prevForm,
-                selectedIds: [...prevForm.selectedIds, 'aadhar']
-              }))
-            }
+  //           // Automatically select Aadhaar if not already selected
+  //           if (!prevForm.selectedIds.includes('aadhar')) {
+  //             setForm(prevForm => ({
+  //               ...prevForm,
+  //               selectedIds: [...prevForm.selectedIds, 'aadhar']
+  //             }))
+  //           }
             
-            alert('Aadhaar XML processed successfully! Form fields have been auto-filled.')
-          } else {
-            alert('Failed to parse Aadhaar XML. Please check the file format.')
-          }
-        }
+  //           alert('Aadhaar XML processed successfully! Form fields have been auto-filled.')
+  //         } else {
+  //           alert('Failed to parse Aadhaar XML. Please check the file format.')
+  //         }
+  //       }
         
-        reader.onerror = () => {
-          alert('Error reading the XML file. Please try again.')
-        }
+  //       reader.onerror = () => {
+  //         alert('Error reading the XML file. Please try again.')
+  //       }
         
-        reader.readAsText(file)
-      } catch (error) {
-        console.error('Error processing XML file:', error)
-        alert('Error processing XML file. Please try again.')
-      } finally {
-        setXmlProcessing(false)
-      }
-    }
-  }
+  //       reader.readAsText(file)
+  //     } catch (error) {
+  //       console.error('Error processing XML file:', error)
+  //       alert('Error processing XML file. Please try again.')
+  //     } finally {
+  //       setXmlProcessing(false)
+  //     }
+  //   }
+  // }
 
   // Updated function to handle Aadhaar verification using parsed data
-  const handleAadhaarVerification = async () => {
-    if (!parsedAadhaarData) {
-      alert('Please upload and process an Aadhaar XML file first')
-      return
-    }
+  // const handleAadhaarVerification = async () => {
+  //   if (!parsedAadhaarData) {
+  //     alert('Please upload and process an Aadhaar XML file first')
+  //     return
+  //   }
 
-    if (!form.selectedIds.includes('aadhar')) {
-      alert('Please select Aadhaar card from ID documents')
-      return
-    }
+  //   if (!form.selectedIds.includes('aadhar')) {
+  //     alert('Please select Aadhaar card from ID documents')
+  //     return
+  //   }
 
-    setIsVerifying(true)
+  //   setIsVerifying(true)
     
-    try {
-      const result = AadhaarComparison.compareWithParsedData(form, parsedAadhaarData)
-      setVerificationResult(result)
+  //   try {
+  //     const result = AadhaarComparison.compareWithParsedData(form, parsedAadhaarData)
+  //     setVerificationResult(result)
       
-      if (result.isMatch) {
-        alert(`Aadhaar verification successful! Confidence: ${result.confidence}%`)
-      } else {
-        alert(`Aadhaar verification failed. Mismatched fields: ${result.misMatchedFields.join(', ')}`)
-      }
-    } catch (error) {
-      console.error('Verification error:', error)
-      alert('Verification failed due to an error')
-    } finally {
-      setIsVerifying(false)
-    }
-  }
+  //     if (result.isMatch) {
+  //       alert(`Aadhaar verification successful! Confidence: ${result.confidence}%`)
+  //     } else {
+  //       alert(`Aadhaar verification failed. Mismatched fields: ${result.misMatchedFields.join(', ')}`)
+  //     }
+  //   } catch (error) {
+  //     console.error('Verification error:', error)
+  //     alert('Verification failed due to an error')
+  //   } finally {
+  //     setIsVerifying(false)
+  //   }
+  // }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault()
     
-    // Optional: Require Aadhaar verification before submission
-    if (form.selectedIds.includes('aadhar') && !verificationResult?.isMatch) {
-      const proceed = confirm('Aadhaar verification is not complete. Do you want to proceed anyway?')
-      if (!proceed) return
-    }
+  //   // Optional: Require Aadhaar verification before submission
+  //   if (form.selectedIds.includes('aadhar') && !verificationResult?.isMatch) {
+  //     const proceed = confirm('Aadhaar verification is not complete. Do you want to proceed anyway?')
+  //     if (!proceed) return
+  //   }
 
-    localStorage.setItem('commonForm', JSON.stringify(form))
+  //   localStorage.setItem('commonForm', JSON.stringify(form))
     
-    // Also save verification result if available
-    if (verificationResult) {
-      localStorage.setItem('aadhaarVerification', JSON.stringify(verificationResult))
-    }
+  //   // Also save verification result if available
+  //   if (verificationResult) {
+  //     localStorage.setItem('aadhaarVerification', JSON.stringify(verificationResult))
+  //   }
     
-    // Save parsed Aadhaar data if available
-    if (parsedAadhaarData) {
-      localStorage.setItem('parsedAadhaarData', JSON.stringify(parsedAadhaarData))
-    }
+  //   // Save parsed Aadhaar data if available
+  //   if (parsedAadhaarData) {
+  //     localStorage.setItem('parsedAadhaarData', JSON.stringify(parsedAadhaarData))
+  //   }
     
-    router.push('/category')
-  }
+  //   router.push('/category')
+  // }
 
   const idOptions = [
     { value: 'aadhar', label: 'Aadhar Card', placeholder: 'Enter 12-digit Aadhar number' },
@@ -246,7 +246,7 @@ export default function Home() {
 
           <div className="flex-1 overflow-y-auto px-6 pb-6">
             <form
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               className="bg-gradient-to-b shadow-md rounded px-8 pt-6 pb-8 w-full"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -365,7 +365,7 @@ export default function Home() {
                 </div>
 
                 {/* Dynamic ID Inputs */}
-                {form.selectedIds.map((idType) => {
+                {/* {form.selectedIds.map((idType) => {
                   const idOption = idOptions.find(option => option.value === idType)
                   return (
                     <div key={idType} className="md:col-span-2">
@@ -381,10 +381,10 @@ export default function Home() {
                       />
                     </div>
                   )
-                })}
+                })} */}
 
                 {/* Aadhaar XML Upload and Verification */}
-                {form.selectedIds.includes('aadhar') && (
+                {/* {form.selectedIds.includes('aadhar') && (
                   <div className="md:col-span-2">
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                       <h3 className="text-lg font-semibold text-blue-800 mb-3">
@@ -406,10 +406,10 @@ export default function Home() {
                             Processing XML file and auto-filling form...
                           </div>
                         )}
-                      </div>
+                      </div> */}
 
                       {/* Display parsed data info */}
-                      {parsedAadhaarData && (
+                      {/* {parsedAadhaarData && (
                         <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded">
                           <div className="text-sm text-green-800 font-medium">
                             ✓ XML Processed Successfully
@@ -431,10 +431,10 @@ export default function Home() {
                         }`}
                       >
                         {isVerifying ? 'Verifying...' : 'Verify Aadhaar Data'}
-                      </button>
+                      </button> */}
 
                       {/* Verification Result Display */}
-                      {verificationResult && (
+                      {/* {verificationResult && (
                         <div className={`mt-4 p-3 rounded ${
                           verificationResult.isMatch 
                             ? 'bg-green-100 border border-green-300' 
@@ -467,7 +467,7 @@ export default function Home() {
                       )}
                     </div>
                   </div>
-                )}
+                )} */}
 
                 {/* Education */}
                 <div className="md:col-span-2">

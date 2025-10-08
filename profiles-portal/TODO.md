@@ -1,0 +1,5 @@
+- [x] Define TypeScript interfaces for CommonForm and ProfileForm in FinalForm.tsx
+- [x] Update useState hooks to use proper types instead of 'any'
+- [x] Update the Object.entries map to use [string, unknown] instead of [string, any]
+- [x] Import Image from 'next/image'
+- [x] Replace <img> tag with <Image> component

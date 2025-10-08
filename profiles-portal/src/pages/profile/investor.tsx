@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function InvestorProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [investorForm, setInvestorForm] = useState({
     professionalBackground: '',
     firmName: '',
@@ -17,13 +15,6 @@ export default function InvestorProfile() {
     investmentFields: '',
     accreditationProof: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,7 +32,6 @@ export default function InvestorProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Investor:', investorForm)
     router.push('/FinalForm')
   }
@@ -58,8 +48,6 @@ export default function InvestorProfile() {
                onSubmit={handleSubmit}
                className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
              >
-          {/* ✅ Common details */}
-          <CommonDetails commonForm={commonForm} />
 
           {/* ✅ Investor-specific fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

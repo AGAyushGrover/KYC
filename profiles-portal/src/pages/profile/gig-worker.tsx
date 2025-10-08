@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function GigWorkerProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [gigForm, setGigForm] = useState({
     primarySkill: '',
     serviceOffered: '',
@@ -16,13 +14,6 @@ export default function GigWorkerProfile() {
     workingPlatforms: '',
     governmentID: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,7 +31,6 @@ export default function GigWorkerProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Gig Worker:', gigForm)
     router.push('/FinalForm')
   }
@@ -58,7 +48,6 @@ export default function GigWorkerProfile() {
           onSubmit={handleSubmit}
           className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
         >
-            <CommonDetails commonForm={commonForm} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Primary Skill */}
             <div>

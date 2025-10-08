@@ -38,7 +38,6 @@ export default function MentorProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Mentor:', mentorForm)
     router.push('/FinalForm')
   }
@@ -55,8 +54,6 @@ export default function MentorProfile() {
               onSubmit={handleSubmit}
               className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
             >
-          {/* ✅ Common details */}
-          <CommonDetails commonForm={commonForm} />
 
           {/* ✅ Mentor-specific fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function StudentProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [studentForm, setStudentForm] = useState({
     institutionName: '',
     enrollmentNumber: '',
@@ -17,13 +15,6 @@ export default function StudentProfile() {
     achievements: '',
     resume: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -41,7 +32,6 @@ export default function StudentProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Student:', studentForm)
     router.push('/FinalForm')
   }
@@ -58,9 +48,6 @@ export default function StudentProfile() {
               onSubmit={handleSubmit}
               className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
             >
-          {/* --- Show common details --- */}
-          <CommonDetails commonForm={commonForm} />
-  
 
           {/* --- Student-specific fields --- */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

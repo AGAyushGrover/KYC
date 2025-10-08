@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
 import Layout from '../../component/Layout'
-import CommonDetails from '../../component/CommonDetails'
 import { useRouter } from 'next/navigation'
 
 export default function LegalProfessionalProfile() {
   const router = useRouter()
-  const [commonForm, setCommonForm] = useState<any>({})
   const [legalForm, setLegalForm] = useState({
     barCouncilNumber: '',
     workEnvironment: '',
@@ -16,13 +14,6 @@ export default function LegalProfessionalProfile() {
     lawFirmOrIndependent: '',
     barCouncilCertificate: '',
   })
-
-  useEffect(() => {
-    const saved = localStorage.getItem('commonForm')
-    if (saved) {
-      setCommonForm(JSON.parse(saved))
-    }
-  }, [])
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -55,7 +46,6 @@ export default function LegalProfessionalProfile() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Common:', commonForm)
     console.log('Legal Professional:', legalForm)
     router.push('/FinalForm')
   }
@@ -82,21 +72,8 @@ export default function LegalProfessionalProfile() {
                 onSubmit={handleSubmit}
                 className="bg-white/80 backdrop-blur-md shadow-lg rounded-2xl px-8 pt-6 pb-8 mb-8 w-full max-w-3xl border border-gray-200"
               >
-          {/* Common details */}
-          <CommonDetails commonForm={commonForm} />
 
-          {/* Right: Profile photo */}
-          {commonForm.profilePhoto && (
-            <div className="md:w-1/3 mt-4 md:mt-0 md:ml-8 flex justify-center">
-              <img
-                src={commonForm.profilePhoto}
-                alt="Profile"
-                className="h-48 w-48 object-cover rounded-full shadow"
-              />
-            </div>
-          )}
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Bar Council Registration Number

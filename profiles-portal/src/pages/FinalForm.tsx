@@ -1,11 +1,39 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import Layout from '../component/Layout'
 import CommonDetails from '../component/CommonDetails'
 
+interface CommonFormDetails {
+  fullName: string;
+  dob: string;
+  age: number | string;
+  email: string;
+  phone: string;
+  education: string;
+  residence: string;
+  addressCity: string;
+  addressState: string;
+  addressCountry: string;
+  currentResidence: string;
+  currentCity: string;
+  currentState: string;
+  currentCountry: string;
+  about: string;
+  interests: string;
+  selectedIds: string[];
+  idDetails: Record<string, string>;
+  profilePhoto?: string;
+}
+
+interface ProfileForm {
+  categoryName: string;
+  [key: string]: unknown;
+}
+
 export default function FinalForm() {
-  const [commonForm, setCommonForm] = useState<any>(null)
-  const [profileForm, setProfileForm] = useState<any>(null)
+  const [commonForm, setCommonForm] = useState<CommonFormDetails | null>(null)
+  const [profileForm, setProfileForm] = useState<ProfileForm | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -88,7 +116,7 @@ export default function FinalForm() {
           </h2>
 
           <div className="space-y-2">
-            {Object.entries(profileForm).map(([key, value]: [string, any]) => {
+            {Object.entries(profileForm).map(([key, value]: [string, unknown]) => {
               if (key === 'categoryName') return null
 
               const label = formatKey(key)
@@ -106,10 +134,12 @@ export default function FinalForm() {
                   <div key={key}>
                     <strong>{label}:</strong>
                     <div className="mt-2">
-                      <img
-                        src={value}
+                      <Image
+                        src={value as string}
                         alt={label}
-                        className="h-48 w-auto rounded-md border shadow"
+                        width={300}
+                        height={192}
+                        className="rounded-md border shadow"
                       />
                     </div>
                   </div>
