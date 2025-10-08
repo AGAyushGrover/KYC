@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Layout from '../component/Layout'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 // import { AadhaarComparison, ComparisonResult } from '../types/aadhaarComparison'
 // import { AadhaarParser } from '../parsers/aadhaarParser'
 
@@ -40,7 +40,7 @@ export default function Home() {
   // const [isVerifying, setIsVerifying] = useState(false)
   // const [xmlProcessing, setXmlProcessing] = useState(false)
 
-  // const router = useRouter()
+  const router = useRouter()
 
   const calculateAge = (dob: string) => {
     if (!dob) return ''
@@ -193,29 +193,29 @@ export default function Home() {
   //   }
   // }
 
-  // const handleSubmit = (e: React.FormEvent) => {
-  //   e.preventDefault()
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
     
-  //   // Optional: Require Aadhaar verification before submission
-  //   if (form.selectedIds.includes('aadhar') && !verificationResult?.isMatch) {
-  //     const proceed = confirm('Aadhaar verification is not complete. Do you want to proceed anyway?')
-  //     if (!proceed) return
-  //   }
+    // // Optional: Require Aadhaar verification before submission
+    // if (form.selectedIds.includes('aadhar') && !verificationResult?.isMatch) {
+    //   const proceed = confirm('Aadhaar verification is not complete. Do you want to proceed anyway?')
+    //   if (!proceed) return
+    // }
 
-  //   localStorage.setItem('commonForm', JSON.stringify(form))
+    // localStorage.setItem('commonForm', JSON.stringify(form))
     
-  //   // Also save verification result if available
-  //   if (verificationResult) {
-  //     localStorage.setItem('aadhaarVerification', JSON.stringify(verificationResult))
-  //   }
+    // // Also save verification result if available
+    // if (verificationResult) {
+    //   localStorage.setItem('aadhaarVerification', JSON.stringify(verificationResult))
+    // }
     
-  //   // Save parsed Aadhaar data if available
-  //   if (parsedAadhaarData) {
-  //     localStorage.setItem('parsedAadhaarData', JSON.stringify(parsedAadhaarData))
-  //   }
+    // // Save parsed Aadhaar data if available
+    // if (parsedAadhaarData) {
+    //   localStorage.setItem('parsedAadhaarData', JSON.stringify(parsedAadhaarData))
+    // }
     
-  //   router.push('/category')
-  // }
+    router.push('/category')
+  }
 
   const idOptions = [
     { value: 'aadhar', label: 'Aadhar Card', placeholder: 'Enter 12-digit Aadhar number' },
@@ -246,7 +246,7 @@ export default function Home() {
 
           <div className="flex-1 overflow-y-auto px-6 pb-6">
             <form
-              // onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
               className="bg-gradient-to-b shadow-md rounded px-8 pt-6 pb-8 w-full"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
